@@ -1,0 +1,8 @@
+docker-test:
+    build: .
+
+    command: python app.py
+    volumes:
+      - .:/home/aswin/Desktop/Tact/docker-compose-github-collector
+    ports:
+      - "9000:9000"
