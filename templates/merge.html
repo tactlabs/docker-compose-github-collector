@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Bootstrap CSS -->
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous"> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        /* Search bar source : https://codepen.io/freshmasterj/pen/qZgVrz */
+
+
+        body {
+            font-family: "Helvetica Neue", Helvetica, Arial;
+            font-size: 17px;
+            line-height: 20px;
+            font-weight: 400;
+            color: #3b3b3b;
+        }
+
+        .centerbox {
+            margin: 0 auto;
+            width: 470px;
+            min-height: 52px;
+            z-index: 2
+        }
+
+        .main-input {
+            background: #fff;
+            height: 50px;
+            width: 327px;
+            color: #055791;
+            border: 1px solid #cccccc;
+            margin-bottom: 0px;
+            -webkit-appearance: none;
+            border-radius: 4px 0px 0px 4px;
+            -moz-border-radius: 4px 0px 0px 4px;
+            -webkit-border-radius: 4px 0px 0px 4px;
+            /* display: inline-block; */
+            text-align: left;
+            font-size: 16px;
+            font-weight: 500;
+            padding: 0px 0px 0px 57px;
+            font-size: 16px;
+            border-right: 0px;
+            background: #ffffff url("http://freeflaticons.com/wp-content/uploads/2014/12/magnifier-1418032771k8g4n.png") 15px 12px no-repeat;
+            background-size: 25px 25px;
+            float: left;
+        }
+
+        #main-submit {
+            background: #055791;
+            color: #fff;
+            /* display: inline-block; */
+            font-size: 19px;
+            font-weight: 500;
+            text-align: center;
+            cursor: pointer;
+            margin-bottom: 0px;
+            -webkit-appearance: none;
+            border-radius: 0px 4px 4px 0px;
+            -moz-border-radius: 0px 4px 4px 0px;
+            -webkit-border-radius: 0px 4px 4px 0px;
+            width: 141px;
+            height: 50px;
+            border: 0px;
+            padding-top: 0px;
+            float: left;
+        }
+
+        #main-submit:hover {
+            background: #2f85c2;
+            color: #fff !important;
+            -webkit-appearance: none;
+        }
+
+        #main-submit-mobile {
+            display: none;
+        }
+
+        footer {
+            border-top: 0px;
+        }
+
+
+        .main-form-container {
+            height: 50px;
+            position: relative;
+        }
+
+        @media screen and (max-width: 580px) {
+            body {
+                font-size: 16px;
+                line-height: 22px;
+            }
+        }
+
+        .wrapper {
+            margin: 0 auto;
+            padding-top: 40px;
+            max-width: 1000px;
+            width: 80%;
+        }
+
+        .table {
+            margin: 0 0 40px 0;
+            width: 100%;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+            display: table;
+        }
+
+        @media screen and (max-width: 580px) {
+            .table {
+                display: block;
+            }
+        }
+
+        .row {
+            display: table-row;
+            background: #f6f6f6;
+            height: 50px;
+            text-align: center;
+        }
+
+
+        .row:nth-of-type(odd) {
+            background: #e9e9e9;
+        }
+
+        .row.header {
+            font-weight: 900;
+            color: #ffffff;
+            background: #055791;
+        }
+
+
+        @media screen and (max-width: 580px) {
+            .row {
+                padding: auto;
+                display: block;
+            }
+
+            .row.header {
+                padding: 0;
+                height: 6px;
+            }
+
+            .row.header .cell {
+                display: none;
+            }
+
+            .row .cell {
+                margin-bottom: 10px;
+            }
+
+            .row .cell:before {
+                margin-bottom: 3px;
+                content: attr(data-title);
+                min-width: 98px;
+                font-size: 10px;
+                line-height: 10px;
+                font-weight: bold;
+                text-transform: uppercase;
+                color: #969696;
+                display: block;
+            }
+        }
+
+        .cell {
+            /* padding: auto 12px; */
+            padding: 14px;
+            display: table-cell;
+        }
+
+        @media screen and (max-width: 580px) {
+            .cell {
+                padding: 2px 16px;
+                display: block;
+            }
+        }
+
+        .main-container {
+            margin: 2% 2%;
+            width: 70%
+        }
+
+        .center-div {
+            margin: 0 auto;
+        }
+
+        .btn-primary:hover {
+            color: white;
+            background-color: #2f85c2;
+            border: 3px solid #2f85c2;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .btn-primary {
+            cursor: pointer;
+            background-color: #f6f6f6;
+            color: #3b3b3b;
+            border: 3px solid #055791;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 8px;
+            display: inline-block;
+            height: 300px;
+            margin: 1rem;
+            position: relative;
+            width: 300px;
+        }
+
+
+        .card-3 {
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+        }
+
+        .card {
+            display: none;
+        }
+
+        .card {
+            position: fixed;
+            right: 8%;
+            top: 30%;
+            z-index: 2;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="main-container">
+        <div class="centerbox center-div">
+            <div class="main-form-container">
+                <form id="" class="" method="post">
+                    <input type="text" class="main-input main-name" name="NAME" placeholder="Search" />
+                    <input id="main-submit" class="" type="submit" value="Search" />
+                </form>
+            </div>
+        </div>
+        <div class="wrapper center-div">
+            <div class="table">
+
+                <div class="row header">
+                    <div class="cell">
+                        Name
+                    </div>
+                    <div class="cell">
+                        Age
+                    </div>
+                    <div class="cell">
+                        Occupation
+                    </div>
+                    <div class="cell">
+                        Location
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="cell" data-title="Name">
+                        Luke Peters
+                    </div>
+                    <div class="cell" data-title="Age">
+                        25
+                    </div>
+                    <div class="cell" data-title="Occupation">
+                        Freelance Web Developer
+                    </div>
+                    <div class="cell" data-title="Location">
+                        <button class="btn btn-primary" type="submit" id="btn-1">Button</button>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="cell" data-title="Name">
+                        Joseph Smith
+                    </div>
+                    <div class="cell" data-title="Age">
+                        27
+                    </div>
+                    <div class="cell" data-title="Occupation">
+                        Project Manager
+                    </div>
+                    <div class="cell" data-title="Location">
+                        <button class="btn btn-primary" type="submit" id="btn-2">Button</button>
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="cell" data-title="Name">
+                        Maxwell Johnson
+                    </div>
+                    <div class="cell" data-title="Age">
+                        26
+                    </div>
+                    <div class="cell" data-title="Occupation">
+                        UX Architect & Designer
+                    </div>
+                    <div class="cell" data-title="Location">
+                        <button class="btn btn-primary" type="submit" id="btn-3">Button</button>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="cell" data-title="Name">
+                        Harry Harrison
+                    </div>
+                    <div class="cell" data-title="Age">
+                        25
+                    </div>
+                    <div class="cell" data-title="Occupation">
+                        Front-End Developer
+                    </div>
+                    <div class="cell" data-title="Location">
+                        <button class="btn btn-primary" type="submit" id="btn-4">Button</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="cell" data-title="Name">
+                        Harry Harrison
+                    </div>
+                    <div class="cell" data-title="Age">
+                        25
+                    </div>
+                    <div class="cell" data-title="Occupation">
+                        Front-End Developer
+                    </div>
+                    <div class="cell" data-title="Location">
+                        <button class="btn btn-primary" type="submit" id="btn-4">Button</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="cell" data-title="Name">
+                        Harry Harrison
+                    </div>
+                    <div class="cell" data-title="Age">
+                        25
+                    </div>
+                    <div class="cell" data-title="Occupation">
+                        Front-End Developer
+                    </div>
+                    <div class="cell" data-title="Location">
+                        <button class="btn btn-primary" type="submit" id="btn-4">Button</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="cell" data-title="Name">
+                        Harry Harrison
+                    </div>
+                    <div class="cell" data-title="Age">
+                        25
+                    </div>
+                    <div class="cell" data-title="Occupation">
+                        Front-End Developer
+                    </div>
+                    <div class="cell" data-title="Location">
+                        <button class="btn btn-primary" type="submit" id="btn-4">Button</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="cell" data-title="Name">
+                        Harry Harrison
+                    </div>
+                    <div class="cell" data-title="Age">
+                        25
+                    </div>
+                    <div class="cell" data-title="Occupation">
+                        Front-End Developer
+                    </div>
+                    <div class="cell" data-title="Location">
+                        <button class="btn btn-primary" type="submit" id="btn-4">Button</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="cell" data-title="Name">
+                        Harry Harrison
+                    </div>
+                    <div class="cell" data-title="Age">
+                        25
+                    </div>
+                    <div class="cell" data-title="Occupation">
+                        Front-End Developer
+                    </div>
+                    <div class="cell" data-title="Location">
+                        <button class="btn btn-primary" type="submit" id="btn-4">Button</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="cell" data-title="Name">
+                        Harry Harrison
+                    </div>
+                    <div class="cell" data-title="Age">
+                        25
+                    </div>
+                    <div class="cell" data-title="Occupation">
+                        Front-End Developer
+                    </div>
+                    <div class="cell" data-title="Location">
+                        <button class="btn btn-primary" type="submit" id="btn-4">Button</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="cell" data-title="Name">
+                        Harry Harrison
+                    </div>
+                    <div class="cell" data-title="Age">
+                        25
+                    </div>
+                    <div class="cell" data-title="Occupation">
+                        Front-End Developer
+                    </div>
+                    <div class="cell" data-title="Location">
+                        <button class="btn btn-primary" type="submit" id="btn-4">Button</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="cell" data-title="Name">
+                        Harry Harrison
+                    </div>
+                    <div class="cell" data-title="Age">
+                        25
+                    </div>
+                    <div class="cell" data-title="Occupation">
+                        Front-End Developer
+                    </div>
+                    <div class="cell" data-title="Location">
+                        <button class="btn btn-primary" type="submit" id="btn-4">Button</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="cell" data-title="Name">
+                        Harry Harrison
+                    </div>
+                    <div class="cell" data-title="Age">
+                        25
+                    </div>
+                    <div class="cell" data-title="Occupation">
+                        Front-End Developer
+                    </div>
+                    <div class="cell" data-title="Location">
+                        <button class="btn btn-primary" type="submit" id="btn-4">Button</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="cell" data-title="Name">
+                        Harry Harrison
+                    </div>
+                    <div class="cell" data-title="Age">
+                        25
+                    </div>
+                    <div class="cell" data-title="Occupation">
+                        Front-End Developer
+                    </div>
+                    <div class="cell" data-title="Location">
+                        <button class="btn btn-primary" type="submit" id="btn-4">Button</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="cell" data-title="Name">
+                        Harry Harrison
+                    </div>
+                    <div class="cell" data-title="Age">
+                        25
+                    </div>
+                    <div class="cell" data-title="Occupation">
+                        Front-End Developer
+                    </div>
+                    <div class="cell" data-title="Location">
+                        <button class="btn btn-primary" type="submit" id="btn-4">Button</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="cell" data-title="Name">
+                        Harry Harrison
+                    </div>
+                    <div class="cell" data-title="Age">
+                        25
+                    </div>
+                    <div class="cell" data-title="Occupation">
+                        Front-End Developer
+                    </div>
+                    <div class="cell" data-title="Location">
+                        <button class="btn btn-primary" type="submit" id="btn-4">Button</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="cell" data-title="Name">
+                        Harry Harrison
+                    </div>
+                    <div class="cell" data-title="Age">
+                        25
+                    </div>
+                    <div class="cell" data-title="Occupation">
+                        Front-End Developer
+                    </div>
+                    <div class="cell" data-title="Location">
+                        <button class="btn btn-primary" type="submit" id="btn-4">Button</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="cards">
+        <div class="card card-3" id="btn-1-card">
+            Card 1
+        </div>
+        <div class="card card-3" id="btn-2-card">
+            Card 2
+        </div>
+        <div class="card card-3" id="btn-3-card">
+            Card 3
+        </div>
+        <div class="card card-3" id="btn-4-card">
+            Card 4
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            var buttons = $(".btn");
+            var cards = $(".card");
+            var active = "";
+            for (var i = 0; i < buttons.length; i++) {
+                $(buttons[i]).click(function () {
+                    if (active !== undefined && active !== "") {
+                        $(active).hide();
+                        if (active === ("#" + this.id + "-card")) {
+                            active = "";
+                            return;
+                        }
+                        active = "";
+                    }
+                    $("#" + this.id + "-card").show();
+                    active = ("#" + this.id + "-card");
+                });
+            }
+
+            var data = [{
+                "_id": {
+                    "$oid": "6110f205b4f091f3bc0c9328"
+                },
+                "login": "alexey-milovidov",
+                "url": "https://api.github.com/users/alexey-milovidov",
+                "name": "N/A",
+                "company": "N/A",
+                "location": "N/A",
+                "email": "N/A",
+                "hireable": "N/A",
+                "bio": "N/A",
+                "public_repos": 25,
+                "public_gists": 55,
+                "followers": 392,
+                "following": 12
+            }, {
+                "_id": {
+                    "$oid": "6110f205b4f091f3bc0c9329"
+                },
+                "login": "alesapin",
+                "url": "https://api.github.com/users/alesapin",
+                "name": "N/A",
+                "company": "N/A",
+                "location": "N/A",
+                "email": "N/A",
+                "hireable": "N/A",
+                "bio": "N/A",
+                "public_repos": 40,
+                "public_gists": 143,
+                "followers": 50,
+                "following": 0
+            }, {
+                "_id": {
+                    "$oid": "6110f205b4f091f3bc0c932a"
+                },
+                "login": "KochetovNicolai",
+                "url": "https://api.github.com/users/KochetovNicolai",
+                "name": "Nikolai Kochetov",
+                "company": "N/A",
+                "location": "N/A",
+                "email": "N/A",
+                "hireable": "N/A",
+                "bio": "N/A",
+                "public_repos": 20,
+                "public_gists": 20,
+                "followers": 43,
+                "following": 0
+            }, {
+                "_id": {
+                    "$oid": "6110f205b4f091f3bc0c932b"
+                },
+                "login": "akuzm",
+                "url": "https://api.github.com/users/akuzm",
+                "name": "Alexander Kuzmenkov",
+                "company": "@ClickHouse",
+                "location": "N/A",
+                "email": "N/A",
+                "hireable": "N/A",
+                "bio": "May all living beings be free from suffering inherent in maintaining, modifying and extending software.",
+                "public_repos": 6,
+                "public_gists": 3,
+                "followers": 23,
+                "following": 0
+            }, {
+                "_id": {
+                    "$oid": "6110f205b4f091f3bc0c932c"
+                },
+                "login": "blinkov",
+                "url": "https://api.github.com/users/blinkov",
+                "name": "Ivan Blinkov",
+                "company": "N/A",
+                "location": "Moscow",
+                "email": "github@blinkov.ru",
+                "hireable": true,
+                "bio": "N/A",
+                "public_repos": 53,
+                "public_gists": 7,
+                "followers": 73,
+                "following": 18
+            }, {
+                "_id": {
+                    "$oid": "6110f205b4f091f3bc0c932d"
+                },
+                "login": "proller",
+                "url": "https://api.github.com/users/proller",
+                "name": "N/A",
+                "company": "N/A",
+                "location": "N/A",
+                "email": "N/A",
+                "hireable": true,
+                "bio": "N/A",
+                "public_repos": 44,
+                "public_gists": 4,
+                "followers": 40,
+                "following": 7
+            }, {
+                "_id": {
+                    "$oid": "6110f205b4f091f3bc0c932e"
+                },
+                "login": "azat",
+                "url": "https://api.github.com/users/azat",
+                "name": "Azat Khuzhin",
+                "company": "N/A",
+                "location": "N/A",
+                "email": "a3at.mail@gmail.com",
+                "hireable": true,
+                "bio": "N/A",
+                "public_repos": 7,
+                "public_gists": 143,
+                "followers": 57,
+                "following": 0
+            }]
+
+            for (var i = 0; i < data.length; i++) {
+                for (var x in data[i]) {
+                    if (data[i][x] != "N/A" && x!== "_id" && x!== "name") {
+                        console.log(data[i][x]);
+                        $(cards[i]).append(x + "  ");
+                        $(cards[i]).append(data[i][x] + "<br>");
+                    }
+                }
+            }
+
+
+        });
+    </script>
+
+</body>
+
+</html>
